@@ -60,7 +60,7 @@ dependencies:
 
 dependency_overrides:
   image: ^3.0.4
-  xml: ^5.3.0
+  xml: ^5.1.2
 
 dev_dependencies:
   flutter_launcher_icons: "^0.8.0"
@@ -113,4 +113,3 @@ flutter:
           weight: 600
         - asset: assets/fonts/Inter-Bold.ttf
           weight: 700
-

@@ -4,18 +4,33 @@ class LoggingInterceptor extends Interceptor{
 
   int _maxCharactersPerLine = 200;
 
-  @override
+
+
+  /*@override
   Future onRequest(RequestOptions options) {
     print("--> ${options.method} ${options.path}");
     print("Content type: ${options.contentType}");
     print("<-- END HTTP");
     return super.onRequest(options);
+  }*/
+  @override
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    print("--> ${options.method} ${options.path}");
+    print("Content type: ${options.contentType}");
+    print("<-- END HTTP");
+    super.onRequest(options, handler);
   }
 
-  @override
+  /*@override
   Future onResponse(Response response) {
+
+
+    return super.onResponse(response);
+  }*/
+  @override
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
     print(
-        "<-- ${response.statusCode} ${response.request.method} ${response.request.path}");
+        "<-- ${response.statusCode} ${response.requestOptions.method} ${response.requestOptions.path}");
     String responseAsString = response.data.toString();
     if (responseAsString.length > _maxCharactersPerLine) {
       int iterations =
@@ -32,16 +47,21 @@ class LoggingInterceptor extends Interceptor{
       print(response.data);
     }
     print("<-- END HTTP");
-
-    return super.onResponse(response);
+    super.onResponse(response, handler);
   }
 
-  @override
+  /*@override
   Future onError(DioError err) {
-    print("<-- Error -->");
-    print(err.error);
-    print(err.message);
+
     return super.onError(err);
+  }*/
+
+@override
+  void onError(DioError err, ErrorInterceptorHandler handler) {
+  print("<-- Error -->");
+  print(err.error);
+  print(err.message);
+    super.onError(err, handler);
   }
 
 }
